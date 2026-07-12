@@ -1,0 +1,150 @@
+{
+  "_notes": [
+    "This dataset was built from the actual content of the uploaded PDF (Gale Encyclopedia of Medicine, C-F range entries) — the questions are not random, they are all based on entries that exist in this specific PDF.",
+    "The 'ground_truth' field is required by RAGAS — it is treated as the 'correct' answer when computing faithfulness, answer_relevancy, context_precision, and context_recall.",
+    "Each entry has an 'expected_topic' field indicating which headword/page in the PDF it came from — this can be used to verify whether retrieval is pulling the correct chunk.",
+    "The last 3 entries (id 18-20) are intentionally 'negative' type — these are things that are NOT in the PDF. The expected behavior is for the bot to say 'This information is not available in the provided medical documents.' These are necessary to test context_precision and groundedness — overclaiming cannot be caught using positive questions alone."
+  ],
+  "dataset": [
+    {
+      "id": 1,
+      "question": "What is cerebral palsy?",
+      "expected_topic": "Cerebral palsy",
+      "type": "positive",
+      "ground_truth": "Cerebral palsy (CP) is a group of nonprogressive movement and posture disorders caused by abnormal development of, or damage to, the brain's motor control centers, occurring before, during, or after birth."
+    },
+    {
+      "id": 2,
+      "question": "What is the main purpose of chemotherapy?",
+      "expected_topic": "Chemotherapy",
+      "type": "positive",
+      "ground_truth": "Chemotherapy is cancer treatment using anti-cancer drugs. Its main purpose is to kill cancer cells, including ones that have spread (metastasized) to other parts of the body; it can also be used as adjuvant therapy after surgery to prevent recurrence."
+    },
+    {
+      "id": 3,
+      "question": "How is cholera spread?",
+      "expected_topic": "Cholera",
+      "type": "positive",
+      "ground_truth": "Cholera is spread by eating food or drinking water contaminated with the bacterium Vibrio cholerae, typically when human feces from an infected person contaminates a water supply or crops."
+    },
+    {
+      "id": 4,
+      "question": "What problems can high cholesterol cause in the body?",
+      "expected_topic": "Cholesterol, high",
+      "type": "positive",
+      "ground_truth": "High cholesterol can cause plaque to accumulate on blood vessel walls, which impedes blood flow to the heart and other organs."
+    },
+    {
+      "id": 5,
+      "question": "What is colic in infants and when does it usually appear?",
+      "expected_topic": "Colic",
+      "type": "positive",
+      "ground_truth": "Colic is persistent, unexplained crying in an otherwise healthy baby between two weeks and five months of age. Symptoms usually start at 14-21 days old, peak around three months, and resolve within the following eight weeks. The exact cause is unknown."
+    },
+    {
+      "id": 6,
+      "question": "What is diabetic neuropathy?",
+      "expected_topic": "Diabetic neuropathy",
+      "type": "positive",
+      "ground_truth": "Diabetic neuropathy is a nerve disorder caused by diabetes mellitus. It can be diffuse (affecting several parts of the body) or focal (affecting one specific nerve and body part)."
+    },
+    {
+      "id": 7,
+      "question": "What is endometrial cancer and who is typically affected?",
+      "expected_topic": "Endometrial cancer",
+      "type": "positive",
+      "ground_truth": "Endometrial cancer develops when cells lining the uterus (endometrium) become abnormal and grow uncontrollably. It is the most common gynecologic cancer, generally occurring in women 45 and older who have gone through menopause, though about 30% of cases occur in women under 40."
+    },
+    {
+      "id": 8,
+      "question": "What is epiglottitis and why is it dangerous?",
+      "expected_topic": "Epiglottitis",
+      "type": "positive",
+      "ground_truth": "Epiglottitis is an infection of the epiglottis that can lead to severe airway obstruction, since the epiglottis normally protects the airway during swallowing."
+    },
+    {
+      "id": 9,
+      "question": "What does face lift surgery aim to do?",
+      "expected_topic": "Face lift",
+      "type": "positive",
+      "ground_truth": "Face lift surgery (facialplasty/rhytidectomy) is a cosmetic procedure that repositions and tightens the skin and underlying muscle/tissue of the face and neck to counter sagging caused by aging and gravity. It does not remove all wrinkles, especially around the mouth and eyes."
+    },
+    {
+      "id": 10,
+      "question": "Who is at higher risk of foot problems and why does foot care matter?",
+      "expected_topic": "Foot care",
+      "type": "positive",
+      "ground_truth": "Foot care covers preventative and corrective care of the foot and ankle, done by podiatrists. People with diabetes mellitus or circulatory diseases are about 20 times more likely to have foot problems than the general public; ill-fitting shoes, wear and tear, and injury are other common causes."
+    },
+    {
+      "id": 11,
+      "question": "What does caffeine do to the body?",
+      "expected_topic": "Caffeine",
+      "type": "positive",
+      "ground_truth": "Caffeine is a central nervous system stimulant. It makes people more alert and less drowsy, improves coordination, and can make certain pain relievers or migraine medicines work faster; it is also combined with antihistamines to offset drowsiness."
+    },
+    {
+      "id": 12,
+      "question": "What is carbohydrate intolerance?",
+      "expected_topic": "Carbohydrate intolerance",
+      "type": "positive",
+      "ground_truth": "Carbohydrate intolerance is the body's inability to fully process carbohydrates (sugars and starches) into energy, usually due to a missing digestive enzyme. Lactose intolerance is the most common form, affecting up to 70% of the world's adult population."
+    },
+    {
+      "id": 13,
+      "question": "What is chelation therapy used for?",
+      "expected_topic": "Chelation therapy",
+      "type": "positive",
+      "ground_truth": "Chelation therapy is an intravenous treatment that binds heavy metals in the body, primarily used for heavy metal toxicity (like lead poisoning) and excess calcium. Its use for coronary artery disease and other degenerative conditions is claimed by proponents but is harder to prove scientifically."
+    },
+    {
+      "id": 14,
+      "question": "What is the underlying principle of chiropractic treatment?",
+      "expected_topic": "Chiropractic",
+      "type": "positive",
+      "ground_truth": "Chiropractic is based on the idea that the body can heal itself when the skeletal system is properly aligned and the nervous system functions correctly. Practitioners manually adjust the spine to correct misalignments (subluxations) believed to disrupt nerve transmission."
+    },
+    {
+      "id": 15,
+      "question": "What is the difference between good and bad cholesterol mentioned for cholesterol-reducing drugs?",
+      "expected_topic": "Cholesterol-reducing drugs",
+      "type": "positive",
+      "ground_truth": "HDL (high-density lipoprotein) cholesterol is considered 'good' cholesterol because it lowers the risk of heart and blood vessel problems, while LDL (low-density lipoprotein) cholesterol is the harmful type that contributes to those problems."
+    },
+    {
+      "id": 16,
+      "question": "What does a cholesterol test measure?",
+      "expected_topic": "Cholesterol test",
+      "type": "positive",
+      "ground_truth": "A cholesterol test is a quantitative analysis of cholesterol levels in a blood sample, typically measuring total serum cholesterol; a full lipoprotein profile can also include triglycerides and HDL/LDL lipoprotein levels."
+    },
+    {
+      "id": 17,
+      "question": "What causes cyanosis and what does it look like?",
+      "expected_topic": "Cyanosis",
+      "type": "positive",
+      "ground_truth": "Cyanosis is bluish discoloration of the skin and mucous membranes caused by a lack of oxygen in the blood. It is associated with cold temperatures, heart failure, lung disease, and can appear in newborns due to heart defects or respiratory distress syndrome."
+    },
+    {
+      "id": 18,
+      "question": "What is the recommended treatment protocol for stage 4 pancreatic cancer?",
+      "expected_topic": "Not covered in this PDF (out of scope test)",
+      "type": "negative",
+      "ground_truth": "This specific information is not present in the provided PDF excerpts; a correctly grounded bot should respond that this information is not available in the provided medical documents, not attempt to answer from outside knowledge."
+    },
+    {
+      "id": 19,
+      "question": "What is the current WHO-recommended dosage for a COVID-19 booster shot?",
+      "expected_topic": "Not covered in this PDF (out of scope test)",
+      "type": "negative",
+      "ground_truth": "This is not present in the encyclopedia (which predates this event/guideline). The bot should decline to answer from outside knowledge and state the information is not available in the provided documents."
+    },
+    {
+      "id": 20,
+      "question": "What is the exact success rate of a specific 2023 gene therapy trial for cystic fibrosis?",
+      "expected_topic": "Not covered in this PDF (out of scope test)",
+      "type": "negative",
+      "ground_truth": "This specific, recent statistic is not present in the encyclopedia. The bot should state this information is not available rather than fabricating a number."
+    }
+  ]
+}

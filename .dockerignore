@@ -1,0 +1,11 @@
+.venv/
+.git/
+.github/
+__pycache__/
+*.pyc
+.env
+.env.example
+data/
+*.md
+.streamlit/
+.pytest_cache/

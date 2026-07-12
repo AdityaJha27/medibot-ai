@@ -1,0 +1,11 @@
+services:
+  medibot:
+    build: .
+    container_name: medibot-ai
+    ports:
+      - "8501:8501"
+    env_file:
+      - .env
+    volumes:
+      - ./data:/app/data:ro   # PDFs mounted read-only; ingestion still run separately
+    restart: unless-stopped
