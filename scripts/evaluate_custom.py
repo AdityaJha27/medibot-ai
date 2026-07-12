@@ -1,14 +1,15 @@
-"""Lightweight custom RAG evaluation — no RAGAS dependency.
+"""Lightweight RAG evaluation harness (RAGAS-free).
 
-Uses:
-- context relevance: already computed by rag_engine (cosine similarity, no extra calls)
-- answer relevancy: cosine similarity between question and answer embeddings (local, no API call)
-- faithfulness: ONE LLM-as-judge call per question (not per-statement like RAGAS), asking
-  whether the answer is fully supported by the retrieved context
-- refusal accuracy: same substring check as before, for negative/out-of-scope questions
+Metrics:
+- context_relevance: cosine similarity, query vs. retrieved chunks (from rag_engine)
+- answer_relevance: cosine similarity, query vs. answer embedding
+- answer_correctness: cosine similarity, answer vs. golden ground_truth
+  (catches answers that are grounded in the wrong retrieved chunk)
+- faithfulness: single LLM-as-judge call — is the answer supported by its context?
+- refusal_accuracy: substring check for correct "not available" responses
 
-Total Groq calls: ~1 (ask) + 1 (judge) per positive question, + 1 per negative question.
-For 20 questions, that's roughly 37 calls total, vs. 300+ with the RAGAS approach.
+All similarity metrics run locally (no API calls). Only faithfulness and the
+initial answer generation hit the Groq API — roughly 2 calls per question.
 """
 
 import json
@@ -84,6 +85,7 @@ def main() -> None:
     faithfulness_scores = []
     context_relevance_scores = []
     answer_relevance_scores = []
+    answer_correctness_scores = []
 
     for i, item in enumerate(positive, start=1):
         print(f"[{i}/{len(positive)}] {item['question']}")
@@ -97,6 +99,12 @@ def main() -> None:
         q_embedding = embedder.embed_query(item["question"])
         a_embedding = embedder.embed_query(result["answer"])
         answer_relevance_scores.append(cosine_similarity(q_embedding, a_embedding))
+
+        # Answer correctness: does the actual answer semantically match the
+        # golden ground_truth, regardless of which chunks were retrieved?
+        # This is the check that catches "faithful to the wrong context" cases.
+        gt_embedding = embedder.embed_query(item["ground_truth"])
+        answer_correctness_scores.append(cosine_similarity(gt_embedding, a_embedding))
 
         if context_text:
             score = score_faithfulness(context_text, result["answer"], llm)
@@ -122,6 +130,7 @@ def main() -> None:
 | Faithfulness (avg) | {avg(faithfulness_scores)} | Single LLM-as-judge call per question |
 | Context Relevance (avg) | {avg(context_relevance_scores)} | Cosine similarity, query vs. retrieved chunks |
 | Answer Relevance (avg) | {avg(answer_relevance_scores)} | Cosine similarity, query vs. answer embedding |
+| Answer Correctness (avg) | {avg(answer_correctness_scores)} | Cosine similarity, answer vs. golden ground_truth |
 | Refusal Accuracy (negative Qs) | {correct}/{len(negative)} | Exact substring check on "not available" |
 """
 
